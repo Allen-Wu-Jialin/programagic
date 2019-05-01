@@ -9,9 +9,9 @@ fps = 60
 display_width = 1500
 display_length = 1071
 screen_one = False #game
-screen_two = True #level
+screen_two = False #level
 screen_three = False #setting
-screen_four = False #menu
+screen_four = True #menu
 screen_five = False #opening screen
 #colors:
 Aqua = (0,255,255)
@@ -41,6 +41,8 @@ textsurface = levelFont.render('1', False, Black)
 setting_screen = pygame.image.load('Settings.jpg')
 level_screen = pygame.image.load('map.jpg')
 menu_screen = pygame.image.load('Home_screen.jpg')
+setting_button = pygame.image.load('setting_buttonIMG.jpg')
+map_button = pygame.image.load('map_buttonIMG.jpg')
 #game_screen = pygame.image.load('')#not created yet
 #opening_screen = pygame.image.load('') #not created yet
 
@@ -96,7 +98,7 @@ def run_Game():
             y += y_change
             someObj.thrust(x,y)
 #button methods
-def menu_Buttons():
+'''def menu_Buttons():
     x_pos =
     y_pos =
     obj_len =
@@ -125,35 +127,33 @@ def setting_Buttons():
     currentScreen = 'settings'
     menuScreen = 'menu'
     button(x_pos, y_pos, obj_len, obj_width, currentScreen, )
-#cS current Screen. oS other Screen
+    '''
 #generates the button
-def button(x,y,lenth,width,cS, oS):
-    mouse = pygame.mouse.get_pos()
-    #print(mouse)
-    click = pygame.mouse.get_pressed()
-    #otherClick = pygame.MOUSEBUTTONUP
-    #print(click)
-    if x+length > mouse[0] >x and y+width > mouse [1] > y:
-        if click[0] == 1:
-            if(cS == 'setting' and oS == 'menu'):
-                screen_four = True
-                screen_three = False
-            elif(cS == 'map' and oS == 'menu'):
-                screen_four = True
-                screen_two = False
-            elif(cS == 'map' and oS == 'game'):
-                screen_one = True
-                screen_two = False
-            elif(cS == 'map' and oS == 'settings'):
-                screen_three = True
-                screen_two = False
-            elif(cS == 'map' and oS == 'menu'):
-                screen_four = True
-                screen_two = False
+def button(self,x,y,length,width,img1,action=None):
+        mouse=pygame.mouse.get_pos()
+        click=pygame.mouse.get_pressed()
+        if length>=mouse[0]>=x and width>=mouse[1]>y:
+            self.screen.blit(img1,(x,y))
+            '''
+            if click[0]==1 and action!=None:
+                if action=="play":
+                    root=tk.Tk()
+                    g=Gui(root)
+                    root.mainloop()
+                    
+                elif action=="quit":
+                    pygame.quit()
+                    quit()
+                elif action=="spawn":
+                    
+                    self.game(x,y)
+                elif action=='sort':
+                    self.bubble(self.sort_list,self.sort_type,self.sort_order)
+                    '''
                 
-            
-    else:
-        pass
+        else:
+            pass
+
         
 
 def game_loop():
@@ -169,7 +169,8 @@ def game_loop():
         '''if event.type == QUIT:
             pygame.quit() 
 '''
-
+        #print('test')
+        #mouse = pygame.mouse.get_pos()
         if(screen_one):
             game_Screen()
             run_Game()
@@ -181,7 +182,8 @@ def game_loop():
             setting_Buttons()
         elif(screen_four):
             menu_Screen()
-            menu_Buttons()
+            
+            button(0,489,300,1071,level_screen,'idk')
         elif(screen_five):
             opening_Screen()
             onClickScreen()
